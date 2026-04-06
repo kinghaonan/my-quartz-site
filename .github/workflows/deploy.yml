@@ -21,16 +21,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # 拉取完整历史（Quartz 构建需要）
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22  # 用 Node 22，和 Quartz 要求一致
+          node-version: 20  # 兼容 Quartz 的稳定版本
           cache: 'npm'
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm config set registry https://registry.npmmirror.com
+          npm install  # 替换 npm ci，避免 lock 文件缺失问题
       - name: Build Quartz
-        run: npx quartz build
+        run: npx quartz build  # 若为旧版 Quartz，替换为 npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
