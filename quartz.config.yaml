@@ -1,0 +1,219 @@
+# yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json
+configuration:
+  pageTitle: Ki Haonan 的学习笔记
+  pageTitleSuffix: " · King Haonan"
+  enableSPA: true
+  enablePopovers: true
+  analytics:
+    provider: null
+  locale: zh-CN
+  # 部署在个人站的子路径下（GitHub Pages 用户站从仓库根提供服务）
+  baseUrl: kinghaonan.github.io/my-quartz-site
+  ignorePatterns:
+    - private
+    - templates
+    - .obsidian
+  theme:
+    fontOrigin: local
+    cdnCaching: false
+    typography:
+      # 页面字体由 custom.scss 覆盖为系统中文字体；这里只给 OG 图生成用，需 Google Fonts 可用名
+      title: "Playwrite CZ"
+      header: "Noto Sans SC"
+      body: "Noto Sans SC"
+      code: "JetBrains Mono"
+    colors:
+      # 默认调色板 = 烟灰霜（玻璃面透壁纸 + 浅色字）。关系图节点/标签只读 :root 变量，
+      # 所以浅色字必须来自全局调色板；正文卡的米白纸底与墨色字在 custom.scss 里单独钉住。
+      lightMode:
+        light: "#1C1814"
+        lightgray: "#2F2822"
+        gray: "#6A6056"
+        darkgray: "#C9BFB2"
+        dark: "#F0E8DC"
+        secondary: "#E8C97A"
+        tertiary: "#C9A45C"
+        highlight: rgba(201, 164, 92, 0.2)
+        textHighlight: "#C9A45C55"
+      darkMode:
+        light: "#1C1814"
+        lightgray: "#2F2822"
+        gray: "#6A6056"
+        darkgray: "#C9BFB2"
+        dark: "#F0E8DC"
+        secondary: "#E8C97A"
+        tertiary: "#C9A45C"
+        highlight: rgba(201, 164, 92, 0.2)
+        textHighlight: "#C9A45C55"
+plugins:
+  - source: "@quartz-community/note-properties"
+    enabled: true
+    order: 5
+    options:
+      hidePropertiesView: true
+  - source: "@quartz-community/created-modified-date"
+    enabled: true
+    options:
+      defaultDateType: modified
+      priority:
+        - frontmatter
+        - git
+        - filesystem
+    order: 10
+  - source: "@quartz-community/syntax-highlighting"
+    enabled: true
+    options:
+      theme:
+        light: one-dark-pro
+        dark: one-dark-pro
+      keepBackground: false
+    order: 20
+  - source: "@quartz-community/obsidian-flavored-markdown"
+    enabled: true
+    options:
+      enableInHtmlEmbed: false
+      enableCheckbox: true
+    order: 30
+  - source: "@quartz-community/github-flavored-markdown"
+    enabled: true
+    order: 40
+    options:
+      enableSmartyPants: false
+  - source: "@quartz-community/table-of-contents"
+    enabled: true
+    order: 50
+    layout:
+      position: right
+      priority: 30
+  - source: "@quartz-community/crawl-links"
+    enabled: true
+    options:
+      markdownLinkResolution: shortest
+    order: 60
+  - source: "@quartz-community/description"
+    enabled: true
+    order: 70
+  - source: "@quartz-community/latex"
+    enabled: true
+    options:
+      renderEngine: katex
+    order: 80
+  - source: "@quartz-community/citations"
+    enabled: false
+    order: 85
+  - source: "@quartz-community/hard-line-breaks"
+    enabled: true
+    order: 90
+  - source: "@quartz-community/ox-hugo"
+    enabled: false
+    order: 91
+  - source: "@quartz-community/roam"
+    enabled: false
+    order: 92
+  - source: "@quartz-community/quartz-fonts"
+    enabled: false
+  - source: "@quartz-themes/core"
+    enabled: false
+    options:
+      theme: tokyo-night
+      mode: both
+  - source: "@quartz-community/remove-draft"
+    enabled: true
+  - source: "@quartz-community/explicit-publish"
+    enabled: false
+  - source: "@quartz-community/alias-redirects"
+    enabled: true
+  - source: "@quartz-community/content-index"
+    enabled: true
+    options:
+      enableSiteMap: true
+      enableRSS: true
+  - source: "@quartz-community/favicon"
+    enabled: true
+  - source: "@quartz-community/og-image"
+    enabled: true
+  - source: "@quartz-community/cname"
+    enabled: true
+  - source: "@quartz-community/canvas-page"
+    enabled: true
+  - source: "@quartz-community/content-page"
+    enabled: true
+  - source: "@quartz-community/folder-page"
+    enabled: true
+  - source: "@quartz-community/tag-page"
+    enabled: true
+  - source: "@quartz-community/explorer"
+    enabled: true
+    layout:
+      position: left
+      priority: 50
+  - source: "@quartz-community/graph"
+    enabled: true
+    layout:
+      position: right
+      priority: 10
+  - source: "@quartz-community/search"
+    enabled: true
+    layout:
+      position: left
+      priority: 20
+      group: toolbar
+      groupOptions:
+        grow: true
+  - source: "@quartz-community/backlinks"
+    enabled: true
+    layout:
+      position: right
+      priority: 50
+  - source: "@quartz-community/article-title"
+    enabled: true
+    layout:
+      position: beforeBody
+      priority: 10
+  - source: "@quartz-community/content-meta"
+    enabled: true
+    layout:
+      position: beforeBody
+      priority: 20
+  - source: "@quartz-community/tag-list"
+    enabled: true
+    layout:
+      position: beforeBody
+      priority: 30
+  - source: "@quartz-community/page-title"
+    enabled: true
+    layout:
+      position: left
+      priority: 10
+  # 站点改为单一浅色玻璃语言（白霜 + 墨字），暗色开关点了没有可见变化，先停用
+  - source: "@quartz-community/darkmode"
+    enabled: false
+    layout:
+      position: left
+      priority: 30
+      group: toolbar
+  - source: "@quartz-community/reader-mode"
+    enabled: true
+    layout:
+      position: left
+      priority: 35
+      group: toolbar
+  - source: "@quartz-community/breadcrumbs"
+    enabled: true
+    layout:
+      position: beforeBody
+      priority: 5
+      condition: not-index
+  - source: "@quartz-community/comments"
+    enabled: false
+    options:
+      provider: giscus
+      options: {}
+    layout:
+      position: afterBody
+layout:
+  groups:
+    toolbar:
+      priority: 35
+      direction: row
+      gap: 0.5rem
