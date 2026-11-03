@@ -32,8 +32,9 @@
     document.querySelectorAll("ul.toc-content").forEach(watch)
   }
 
-  document.addEventListener("DOMContentLoaded", setup)
-  // SPA 换页后重新挂
-  window.addEventListener("nav", setup)
-  window.addEventListener("render", setup)
+  // Quartz 的 nav / render 是 document.dispatchEvent，CustomEvent 默认不冒泡，
+  // 挂在 window 上收不到。
+  document.addEventListener("nav", setup)
+  document.addEventListener("render", setup)
+  setup()
 })()
