@@ -32,7 +32,7 @@ git clone --recursive https://github.com/volantis-x/community && cd community &&
 然后浏览器访问 http://localhost:4000/ （默认）你会看到和 [社区](https://github.com/volantis-x/community)一样的界面，接下来ctrl+c退出，我们删掉不必要的内容，然后添加个性化内容。
 ## 2. 更改导航栏
 
-![导航栏](/image/volantis配置/导航栏.png)
+![导航栏](attachments/volantis配置/导航栏.png)
 
 导航栏配置位于 `_config.volantis.yml` 文件的 `navbar` 部分：
 
@@ -51,7 +51,7 @@ navbar:
 
 ### 主菜单修改
 
-![主菜单](/image/volantis配置/主菜单.png)
+![主菜单](attachments/volantis配置/主菜单.png)
 
 在 `navbar.menu` 数组中添加/删除菜单项，每个项目包含：
 - `name`：菜单名称

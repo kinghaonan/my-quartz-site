@@ -166,10 +166,16 @@ function walk(dir) {
 
 const copiedImages = new Set()
 const missingImages = new Set()
+const imageRootExists = fs.existsSync(IMAGE_ROOT)
 
 function copyReferencedImage(rel) {
-  if (!fs.existsSync(IMAGE_ROOT)) return false
   const clean = rel.replace(/[?#].*$/, "")
+  // 图片根目录不存在（CI 上就没有 D:/kinghaonan.github.io）也要记下来，
+  // 否则会静默发布一堆破图
+  if (!imageRootExists) {
+    missingImages.add(clean)
+    return false
+  }
   const source = path.resolve(IMAGE_ROOT, clean)
   if (!source.startsWith(IMAGE_ROOT + path.sep) || !fs.existsSync(source)) {
     missingImages.add(clean)
@@ -416,7 +422,12 @@ console.log(`[adapt] ${mdCount} 篇 → ${path.relative(ROOT, OUT) || OUT}`)
 console.log(`[adapt] 复制资产 ${assetCount} 个，引用图片 ${copiedImages.size} 个`)
 if (missingImages.size) {
   const list = [...missingImages].slice(0, 8).join(", ")
-  console.warn(`[adapt] 未找到 ${missingImages.size} 张图片：${list}${missingImages.size > 8 ? " …" : ""}`)
+  const why = imageRootExists ? "" : `（找不到图片根目录 ${IMAGE_ROOT}）`
+  console.error(
+    `[adapt] ${missingImages.size} 张 /image/ 图片没能搬进构建${why}：${list}${missingImages.size > 8 ? " …" : ""}`,
+  )
+  console.error("[adapt] 请把图片放进笔记正文所在文件夹的 attachments/ 并改成相对引用，构建已标记失败")
+  process.exitCode = 1
 }
 if (leftoverCount) {
   console.warn(`[adapt] 共 ${leftoverCount} 处 Volantis 标签未解析，构建已标记失败`)

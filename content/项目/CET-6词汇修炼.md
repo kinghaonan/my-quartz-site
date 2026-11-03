@@ -17,7 +17,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript
 
 https://developer.mozilla.org/en-US/docs/Web/CSS
 
-![image-20260324165727022](/image/project/cet-6/review.png) 
+![image-20260324165727022](attachments/project/cet-6/review.png) 
 
 ## ✨ 特性
 
