@@ -312,6 +312,33 @@ body {
 }
 
 /* ---- 右侧：Graph / TOC / Backlinks ---- */
+
+/* 右栏是 100vh 的 sticky 列，但上游给 .toc 的 flex: 0 0.5 auto 缩不到剩余空间，
+   长目录会把整列顶到 1089px 高，卡片上下两头都被窗口裁掉。让 .toc 吃满剩余高度、
+   列表在内部滚动，graph 与 backlinks 保持自身高度。 */
+.page > #quartz-body > .sidebar.right > .graph {
+  flex: 0 0 auto;
+}
+
+.page > #quartz-body > .sidebar.right > .toc {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.page > #quartz-body > .sidebar.right > .toc > ul.toc-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.page > #quartz-body > .sidebar.right > .backlinks {
+  flex: 0 1 auto;
+  min-height: 0;
+}
+
 .toc,
 .backlinks {
   @include glass-card;

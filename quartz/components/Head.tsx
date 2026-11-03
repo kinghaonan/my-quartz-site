@@ -96,6 +96,7 @@ export default (() => {
 
         {css.map((resource) => CSSResourceToStyleElement(resource, true))}
         <link rel="stylesheet" href={joinSegments(baseDir, "static/glass.css")} />
+        <script defer src={joinSegments(baseDir, "static/toc-follow.js")}></script>
         {js
           .filter((resource) => resource.loadTime === "beforeDOMReady")
           .map((res) => JSResourceToScriptElement(res, true))}
